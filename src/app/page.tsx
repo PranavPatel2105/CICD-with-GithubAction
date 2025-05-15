@@ -6,6 +6,7 @@ export default function Home() {
 			<div className={styles.container}>
 				<h1 className={styles.title}>CI/CD Pipeline Demo</h1>
 				<h2 className={styles.author}>Created by Pranav Patel</h2>
+				<p className={styles.timestamp}>Last Updated: {new Date().toLocaleString()}</p>
 				<p className={styles.description}>
 					A Next.js project demonstrating GitHub Actions CI/CD pipeline
 				</p>
