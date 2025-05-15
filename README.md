@@ -1,6 +1,28 @@
-# CI/CD with GitHub Actions Demo
+# CICD with GitHub Actions
 
-This is a [Next.js](https://nextjs.org/) project demonstrating CI/CD pipeline implementation using GitHub Actions.
+This project demonstrates a CI/CD pipeline using GitHub Actions and Vercel deployment.
+
+## Pipeline Features
+
+- **Continuous Integration**:
+  - Linting
+  - Testing
+  - Building
+
+- **Continuous Deployment**:
+  - Staging deployment on Pull Requests
+  - Production deployment on merge to master
+
+## Deployment URLs
+
+- Production: https://cicd-with-github-action.vercel.app/
+- Staging: Generated dynamically for each PR
+
+## Technology Stack
+
+- Next.js
+- GitHub Actions
+- Vercel
 
 ## Features
 
