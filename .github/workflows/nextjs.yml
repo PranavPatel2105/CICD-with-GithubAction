@@ -1,0 +1,13 @@
+# This workflow has been deprecated
+# Please see ci-cd.yml for the current workflow
+
+name: Deprecated Next.js Workflow
+on:
+  push:
+    branches: []  # This ensures the workflow never runs
+
+jobs:
+  disabled:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This workflow is deprecated. Please see ci-cd.yml"
