@@ -32,6 +32,31 @@ export default function Home() {
 						"Quality is not an act, it is a habit." - Aristotle
 					</p>
 				</div>
+				<div className={styles.technologies}>
+					<h2>⚡ Technologies Used</h2>
+					<div className={styles.techGrid}>
+						<div className={styles.techItem}>
+							<span>⚛️</span>
+							<h3>Next.js</h3>
+							<p>React Framework</p>
+						</div>
+						<div className={styles.techItem}>
+							<span>🔄</span>
+							<h3>GitHub Actions</h3>
+							<p>CI/CD Pipeline</p>
+						</div>
+						<div className={styles.techItem}>
+							<span>▲</span>
+							<h3>Vercel</h3>
+							<p>Deployment Platform</p>
+						</div>
+						<div className={styles.techItem}>
+							<span>📦</span>
+							<h3>npm</h3>
+							<p>Package Manager</p>
+						</div>
+					</div>
+				</div>
 				<div className={styles.statusCheck}>
 					<h3>🔄 Status Check</h3>
 					<p>Last Deployment: <span className={styles.timestamp}>{new Date().toLocaleString()}</span></p>
