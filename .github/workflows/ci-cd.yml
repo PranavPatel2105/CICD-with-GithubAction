@@ -1,5 +1,5 @@
-# CI Pipeline for Next.js Project
-name: CI Pipeline
+# CI/CD Pipeline for Next.js Project
+name: CI/CD Pipeline
 
 on:
   push:
@@ -31,9 +31,71 @@ jobs:
       
       - name: Build application
         run: npm run build
+        
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: |
+            .next
+            public
+            package.json
+            next.config.js
+            .env*
+          retention-days: 1
+
+  deploy-preview:
+    name: Deploy Preview
+    needs: [build-and-test]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    environment:
+      name: preview
+      url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+      - uses: actions/checkout@v4
       
-      - name: List build output
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: .next
+          path: .next
+      
+      - name: Deploy to Vercel
+        id: deploy
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-args: '--prebuilt'
+
+  deploy-production:
+    name: Deploy Production
+    needs: [build-and-test]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    environment:
+      name: production
+      url: https://cicd-with-github-action.vercel.app
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download build output
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: .
+      
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      
+      - name: Deploy to Vercel
         run: |
-          echo "Listing .next directory:"
-          ls -la .next || true
-          echo "Build completed successfully!" 
+          vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} 
