@@ -19,6 +19,27 @@ export default function Home() {
 						<li>✅ Production Deployment</li>
 					</ul>
 				</div>
+				<div className={styles.goals}>
+					<h2>🎯 Project Goals</h2>
+					<ul>
+						<li>🚀 Implement automated deployment workflow</li>
+						<li>🔍 Ensure code quality through automated testing</li>
+						<li>🛠️ Master modern CI/CD practices</li>
+						<li>📱 Create responsive and user-friendly interface</li>
+						<li>🔄 Maintain continuous integration standards</li>
+					</ul>
+					<p className={styles.quote}>
+						"Quality is not an act, it is a habit." - Aristotle
+					</p>
+				</div>
+				<div className={styles.statusCheck}>
+					<h3>🔄 Status Check</h3>
+					<p>Last Deployment: <span className={styles.timestamp}>{new Date().toLocaleString()}</span></p>
+					<div className={styles.statusBadge}>
+						<span className={styles.dot}></span>
+						System Status: Online
+					</div>
+				</div>
 			</div>
 		</main>
 	);
